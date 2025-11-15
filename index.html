@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Kayhan Rahimi - Senior Software Engineer | Go, Rust, eBPF Expert</title>
+    
+    <meta name="description" content="Kayhan Rahimi is a Software Engineer specializing in Go, Rust, and network programming (eBPF/XDP). View his professional work and portfolio.">
+    <meta name="keywords" content="Kayhan Rahimi, کیهان رحیمی, Software Engineer, Go Developer, Rust, eBPF, XDP, Network Programming, Distributed Systems, Portfolio">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ------------------------- */
+        /* --- CSS VARIABLES (THEMES) --- */
+        /* ------------------------- */
+        :root {
+            /* 🎨 Dark Mode (New Deep Blue Theme) */
+            background: radial-gradient(circle at top left, #1a222c, #0D1117 75%);
+            --text-color: #C9D1D9;
+            --card-bg: #161B22;
+            --profile-border: #30363D;
+            --secondary-text: #8B949E;
+            --toggle-bg: #21262D;
+            --toggle-icon: '☀️';
+
+            /* --- Code Block Colors (Dark) --- */
+            --code-bg: #010409;
+            --code-key: #7EE787;
+            --code-string: #A5D6FF;
+            --code-default: #C9D1D9;
+        }
+
+        body.light-mode {
+            /* ☀️ Light Mode */
+            background: radial-gradient(circle at top left, #fcfcfc, #e9e9e9 75%);
+            --text-color: #121212;
+            --card-bg: #ffffff;
+            --profile-border: #ddd;
+            --secondary-text: #555;
+            --toggle-bg: #eee;
+            --toggle-icon: '🌙';
+
+            /* --- Code Block Colors (Light) --- */
+            --code-bg: #f5f5f5;
+            --code-key: #008000;
+            --code-string: #c41a16;
+            --code-default: #1e1e1e;
+        }
+
+        /* ------------------------- */
+        /* --- GLOBAL STYLES --- */
+        /* ------------------------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            position: relative; 
+        }
+
+        /* ------------------------- */
+        /* --- VIDEO DISPLAY (NEW) --- */
+        /* ------------------------- */
+        #video-display {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            display: none;
+            background: black;
+        }
+        #video-display iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* ------------------------- */
+        /* --- THEME TOGGLE BUTTON --- */
+        /* ------------------------- */
+        #theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--toggle-bg);
+            color: var(--text-color);
+            border: 1px solid var(--profile-border);
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        #theme-toggle::before {
+            content: var(--toggle-icon);
+        }
+
+        /* ------------------------- */
+        /* --- PROFILE CARD --- */
+        /* ------------------------- */
+        .profile-card {
+            display: flex;
+            flex-direction: column; 
+            gap: 30px; 
+            background-color: var(--card-bg);
+            padding: 30px 40px;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--profile-border);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .profile-info-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--profile-border);
+            flex-shrink: 0;
+        }
+        .profile-info h1 {
+            margin-bottom: 5px;
+        }
+        .name-heading {
+            font-family: "Momo Trust Display", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 2rem;
+        }
+        .profile-info p {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            line-height: 1.5;
+        }
+
+        /* ------------------------- */
+        /* --- CODE BLOCK (macOS dots) --- */
+        /* ------------------------- */
+        .code-container {
+            background-color: var(--code-bg);
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .code-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: #2c2f35;
+            border-bottom: 1px solid #3c3f46;
+        }
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .traffic-light.red { 
+            background-color: #FF5F56; 
+            cursor: pointer; 
+        }
+        .traffic-light.yellow { background-color: #FFBD2E; }
+        .traffic-light.green { background-color: #27C93F; }
+
+        .code-container pre {
+            font-family: "Fira Code", "SF Mono", "Courier New", Courier, monospace; 
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--code-default);
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        /* Syntax Highlighting */
+        .code-key { color: var(--code-key); }
+        .code-string { color: var(--code-string); }
+        
+        /* ------------------------- */
+        /* --- SOCIAL LINKS & FOOTER --- */
+        /* ------------------------- */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .social-icon {
+            color: var(--secondary-text);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icon:hover {
+            color: var(--text-color);
+            transform: scale(1.2);
+        }
+        .social-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--profile-border);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        footer p {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .profile-card { padding: 25px; }
+            .profile-info-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-pic { width: 120px; height: 120px; }
+            #theme-toggle {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .code-container pre { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="video-display">
+        <iframe src="goodbye.mp4" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="site-content-wrapper">
+
+        <main class="profile-card">
+            
+            <button id="theme-toggle" title="Toggle Theme"></button>
+
+            <div class="profile-info-wrapper">
+                <img src="Kayhan_Rahimi.jpg" alt="Kayhan Rahimi Profile Picture - Software Engineer" class="profile-pic">
+                
+                <div class="profile-info">
+                    <h1 class="name-heading">Kayhan Rahimi</h1>
+
+                    <p>i have to wait to end something = 8 month</p>
+                </div>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="traffic-light red" id="close-site-button"></div>
+                    <div class="traffic-light yellow"></div>
+                    <div class="traffic-light green"></div>
+                </div>
+                <pre><code><span class="code-key">work:</span>
+  <span class="code-key">current:</span> <span class="code-string">"null"</span>
+  <span class="code-key">previous:</span>
+    - <span class="code-string">"null"</span>
+
+<span class="code-key">programming:</span>
+  - <span class="code-string">"dart"</span>
+  - <span class="code-string">"flutter"</span>
+  - <span class="code-string">"mql5"</span>
+  - <span class="code-string">"python"</span>
+
+<span class="code-key">interests:</span>
+  - <span class="code-string">"pinescript"</span>
+  - <span class="code-string">"mql4"</span>
+  - <span class="code-string">"rive"</span>
+  - <span class="code-string">"network"</span>
+</code></pre>
+            </div>
+
+        </main>
+
+        <div class="social-links">
+            <a href="mailto:kayhanwork@gmail.com" class="social-icon" title="Email" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://github.com/kayhaniel" class="social-icon" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://linkedin.com/in/kayhan-rahimi" class="social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+
+            <a href="https://t.me/kayhan" class="social-icon" title="Telegram" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/></svg>
+            </a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Kayhan Rahimi. All rights reserved.</p>
+        </footer>
+
+    </div> <script>
+        /* ------------------------- */
+        /* --- JAVASCRIPT --- */
+        /* ------------------------- */
+        
+        // 💡 منطق تغییر تم
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+
+        // 💡 منطق نمایش ویدیو هنگام کلیک روی دکمه خروج (دایره قرمز)
+        document.getElementById('close-site-button').addEventListener('click', () => {
+            const contentWrapper = document.querySelector('.site-content-wrapper');
+            const videoContainer = document.getElementById('video-display');
+            
+            contentWrapper.style.display = 'none';
+            document.getElementById('theme-toggle').style.display = 'none';
+            
+            videoContainer.style.display = 'block';
+            
+            document.body.style.padding = '0';
+        });
+    </script>
+
+</body>
+</html>
